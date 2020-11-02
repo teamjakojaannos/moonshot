@@ -1,0 +1,9 @@
+/.vs/
+/Binaries/
+/DerivedDataCache/
+/Intermediate/
+/Saved/
+
+*.blend1
+*.blend2
+*.blend3
