@@ -108,12 +108,7 @@ void AMoonshotCharacter::OnFire()
 			// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
 			const FVector SpawnLocation = ((FP_MuzzleLocation != nullptr) ? FP_MuzzleLocation->GetComponentLocation() : GetActorLocation()) + SpawnRotation.RotateVector(GunOffset);
 
-			//Set Spawn Collision Handling Override
-			FActorSpawnParameters ActorSpawnParams;
-			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
-
-			// spawn the projectile at the muzzle
-			World->SpawnActor<AMoonshotProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			Fire(SpawnLocation, SpawnRotation);
 		}
 	}
 
@@ -139,8 +134,11 @@ void AMoonshotCharacter::MoveForward(float Value)
 {
 	if (Value != 0.0f)
 	{
-		// add movement in that direction
-		AddMovementInput(GetActorForwardVector(), Value);
+		const FVector ForwardVector = GetActorForwardVector();
+		FVector Direction = FVector(ForwardVector.X, ForwardVector.Y, 0.0f);
+		Direction.Normalize();
+
+		AddMovementInput(Direction, Value);
 	}
 }
 
