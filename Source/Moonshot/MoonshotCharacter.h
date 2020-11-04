@@ -60,6 +60,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	class UAnimMontage* FireAnimation;
 
+	UFUNCTION(BlueprintImplementableEvent, Category=Weapons)
+	void Fire(FVector SpawnLocation, FRotator SpawnRotation);
+
 protected:
 	
 	/** Fires a projectile. */
