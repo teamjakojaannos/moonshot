@@ -15,3 +15,20 @@ AMoonshotGameMode::AMoonshotGameMode()
 	// use our custom HUD class
 	HUDClass = AMoonshotHUD::StaticClass();
 }
+
+void AMoonshotGameMode::StartMission()
+{
+	if (UWorld* World = GetWorld())
+	{
+		if (World->IsServer() && GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, "on server!");
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "NOT on server!");
+		}
+
+		World->ServerTravel(FString("/Game/Moonshot/Maps/Level_1?listen"), true);
+	}
+}

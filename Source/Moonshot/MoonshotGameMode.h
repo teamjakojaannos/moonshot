@@ -6,13 +6,16 @@
 #include "GameFramework/GameModeBase.h"
 #include "MoonshotGameMode.generated.h"
 
-UCLASS(minimalapi)
+UCLASS(Blueprintable, BlueprintType, minimalapi)
 class AMoonshotGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
 public:
 	AMoonshotGameMode();
+
+	UFUNCTION(BlueprintCallable, Category = Game)
+	void StartMission();
 };
 
 
